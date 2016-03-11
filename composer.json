@@ -1,7 +1,7 @@
 {
   "name": "hiropeke/slim-blade-view",
   "type": "library",
-  "description": "Slim Framework 3 view helper built on top of the Blade component",
+  "description": "Slim Framework 3 view helper built on the Blade component",
   "keywords": [
     "slim",
     "framework",
