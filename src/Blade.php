@@ -18,6 +18,11 @@ class Blade
     protected $cachePath;
 
     /**
+     * @var Dispatcher|null
+     */
+    protected $events;
+
+    /**
      * @var array
      */
     protected $attributes;
@@ -35,8 +40,8 @@ class Blade
         }
         $this->viewPaths = $viewPaths;
         $this->cachePath = $cachePath;
+        $this->events = $events;
         $this->attributes = $attributes;
-        $this->renderer = new \Philo\Blade\Blade($viewPaths, $cachePath, $events);
     }
 
     /**
@@ -164,6 +169,7 @@ class Blade
 
         $data = array_merge($this->attributes, $data);
 
-        return $this->renderer->view()->make($template, $data)->render();
+        $renderer = new \Philo\Blade\Blade($this->viewPaths, $this->cachePath, $this->events);
+        return $renderer->view()->make($template, $data)->render();
     }
 }
