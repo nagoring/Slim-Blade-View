@@ -11,7 +11,7 @@ You can use this component to create and render templates in your Slim Framework
 
 Via [Composer](https://getcomposer.org/)
 
-```
+```bash
 $ composer require hiropeke/slim-blade-view
 ```
 
@@ -19,7 +19,7 @@ Requires Slim Framework 3 and PHP 5.5.0 or newer.
 
 ## Usage
 
-```
+```php
 // Slim Settings
 $config = [
     'settings' => [
@@ -60,7 +60,7 @@ $app->run();
 
 ## Testing
 
-```
+```bash
 $ phpunit
 ```
 
