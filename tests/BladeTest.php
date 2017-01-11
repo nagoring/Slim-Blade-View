@@ -30,7 +30,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     {
         $views = new Blade([
             'One' => __DIR__ . '/templates',
-        ]);
+        ], __DIR__ . '/../data/cache');
         $output = $views->fetch('example', [
             'name' => 'Josh',
         ]);
@@ -42,7 +42,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         $views = new Blade([
             'One' => __DIR__ . '/templates',
             'Two' => __DIR__ . '/another',
-        ]);
+        ], __DIR__ . '/../data/cache');
         $outputOne = $views->fetch('example', [
             'name' => 'Peter',
         ]);
