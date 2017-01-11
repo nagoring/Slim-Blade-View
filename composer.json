@@ -1,5 +1,5 @@
 {
-  "name": "hiropeke/slim-blade-view",
+  "name": "rubellum/slim-blade-view",
   "type": "library",
   "description": "Slim Framework 3 view helper built on the Blade component",
   "keywords": [
