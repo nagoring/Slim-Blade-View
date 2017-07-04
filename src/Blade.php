@@ -3,6 +3,7 @@
 namespace Slim\Views;
 
 use Illuminate\Events\Dispatcher;
+use Illuminate\View\Compilers\BladeCompiler;
 use Psr\Http\Message\ResponseInterface;
 
 class Blade
@@ -28,6 +29,11 @@ class Blade
     protected $attributes;
 
     /**
+     * @var \Philo\Blade\Blade
+     */
+    protected $renderer;
+
+    /**
      * Blade constructor.
      * @param array $viewPaths
      * @param $cachePath
@@ -42,6 +48,7 @@ class Blade
         $this->cachePath = $cachePath;
         $this->events = $events;
         $this->attributes = $attributes;
+        $this->renderer = new \Philo\Blade\Blade($this->viewPaths, $this->cachePath, $this->events);
     }
 
     /**
@@ -147,6 +154,23 @@ class Blade
     }
 
     /**
+     * @param string   $name
+     * @param callable $handler
+     */
+    public function directive($name, callable $handler)
+    {
+        $this->getCompiler()->directive($name, $handler);
+    }
+
+    /**
+     * @return BladeCompiler
+     */
+    public function getCompiler()
+    {
+        return $this->renderer->getCompiler();
+    }
+
+    /**
      * Renders a template and returns the result as a string
      *
      * cannot contain template as a key
@@ -169,7 +193,6 @@ class Blade
 
         $data = array_merge($this->attributes, $data);
 
-        $renderer = new \Philo\Blade\Blade($this->viewPaths, $this->cachePath, $this->events);
-        return $renderer->view()->make($template, $data)->render();
+        return $this->renderer->view()->make($template, $data)->render();
     }
 }

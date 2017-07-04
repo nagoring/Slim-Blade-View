@@ -1,10 +1,9 @@
 <?php
 
-namespace Slim\Tests\Views;
+namespace Tests;
 
+use Illuminate\View\Compilers\BladeCompiler;
 use Slim\Views\Blade;
-
-require __DIR__ . '/../vendor/autoload.php';
 
 class BladeTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +14,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->view = new Blade([__DIR__ . '/templates', __DIR__ . '/another'], __DIR__ . '/../data/cache');
+        $this->view = new Blade([__DIR__ . '/templates', __DIR__ . '/another'], __DIR__ . '/data/cache');
     }
 
     public function testFetch()
@@ -30,7 +29,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
     {
         $views = new Blade([
             'One' => __DIR__ . '/templates',
-        ], __DIR__ . '/../data/cache');
+        ], __DIR__ . '/data/cache');
         $output = $views->fetch('example', [
             'name' => 'Josh',
         ]);
@@ -42,7 +41,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
         $views = new Blade([
             'One' => __DIR__ . '/templates',
             'Two' => __DIR__ . '/another',
-        ], __DIR__ . '/../data/cache');
+        ], __DIR__ . '/data/cache');
         $outputOne = $views->fetch('example', [
             'name' => 'Peter',
         ]);
@@ -73,5 +72,19 @@ class BladeTest extends \PHPUnit_Framework_TestCase
             'name' => 'Josh',
         ]);
         $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $response);
+    }
+
+    public function testDirective()
+    {
+        $this->view->directive('hello', function ($expr) {
+            return 'Hello, ' . $expr;
+        });
+        $output = $this->view->fetch('directive');
+        $this->assertEquals("<p>Hello, World</p>\n", $output);
+    }
+
+    public function testCompiler()
+    {
+        $this->assertInstanceOf(BladeCompiler::class, $this->view->getCompiler());
     }
 }
