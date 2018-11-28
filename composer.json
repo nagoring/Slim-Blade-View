@@ -1,5 +1,5 @@
 {
-  "name": "rubellum/slim-blade-view",
+  "name": "nagoling/slim-blade-view-php70",
   "type": "library",
   "description": "Slim Framework 3 view helper built on the Blade component",
   "keywords": [
@@ -13,8 +13,8 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Hiroaki Matsuura",
-      "email": "lib2jp@gmail.com"
+      "name": "nagomi",
+      "email": "nagomi.github@gmail.com"
     }
   ],
   "require": {
